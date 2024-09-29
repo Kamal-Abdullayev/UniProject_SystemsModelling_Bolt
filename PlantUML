@@ -1,0 +1,166 @@
+@startuml
+' ENUMERATIONS
+enum PaymentMethod {
+  Card
+  Cash
+  PromoCode
+  ApplePay
+  GooglePay
+  Subscription
+}
+
+enum AccountStatus {
+  Active
+  Processing
+  Inactive
+}
+
+enum OrderStatus {
+  Successful
+  Waiting
+  Driver Cancel
+  Customer Cancel
+}
+
+enum TransactionStatus {
+  Successful
+  Processing
+  Failure
+}
+
+enum CarStatus {
+  Bolt
+  Premium
+  Cargo
+  WomanToWoman
+  Pet
+}
+
+
+class ElectricCar {
+  Battery: int
+}
+
+class Car {
+  Seats: int
+}
+
+class Scooter {
+  Battery: int
+}
+
+' ABSTRACT CLASS
+abstract class Vehicle {
+  Id: String
+  Status: String
+  VehicleIdentificationNumber: String
+  Type: String
+  Location: String
+  Range: int <<derived>> ' Derived from Electric Vehicle battery percentage
+  VehicleClassType: VehicleClassType
+}
+
+' GENERALIZATION
+Car <|-- Vehicle
+Scooter <|-- Vehicle
+ElectricCar <|-- Car
+
+
+
+' SUPERCLASS AND GENERALIZATION
+class User {
+  Id: String
+  Name: String
+  Surname: String
+  PhoneNumber: String
+  Email: String
+  IdentityNum: String
+  AccountStatus: String
+  LicenceId: String
+  Birth: Date
+  Type: String
+  Cards: List[Card]
+  Rating: float
+}
+
+class Customer extends User {
+  Id: String
+}
+
+class Driver extends User {
+  Id: String
+  EarnedMoney: int
+  EarnedBonus: int
+  WorkHours: int
+}
+
+class Licence {
+  Id: String
+  PIN: String
+  StartDate: Date
+  ExpiredDate: Date
+  VehicleCategory: String
+}
+
+' ASSOCIATIONS AND ROLES
+User "1" -- "0..*" Order 
+Vehicle "1" -- "0..*" Order 
+User "1" -- "1" Transaction 
+PaymentMethod "1" -- "1" Transaction
+User "0..*" -- "0..*" Address
+Order "0..*" -- "0..*" Address
+Order "1" -- "1" Transaction
+Subscription "1" -- "1" Transaction
+Customer "1" -- "0..*" Subscription
+AccountStatus "1" -- "0..*" User
+OrderStatus "1" -- "0..*" Order
+TransactionStatus "1" -- "0..*" Transaction
+CarStatus "1" -- "0..*" Car
+
+Vehicle "1" -- "1" Address
+
+
+
+class Order {
+  Id: String
+  UserId: String
+  VehicleId: String
+  StartDate: DateTime
+  EndDate: DateTime
+  Cost: float <<derived>> ' Derived from ride duration and pricing
+  Status: String
+  Location: String
+}
+
+class Transaction {
+  Id: String
+  Amount: float
+  Status: String
+  UserId: String
+  PaymentType: PaymentMethod
+}
+
+
+class Subscription {
+  Id: String
+  Name: String
+  Info: String
+  Price: float
+  ValidityPeriod: String
+  VehicleType: String
+}
+
+class Address {
+  Id: String
+  Name: String
+  City: String
+  Country: String
+  Street: String
+  Apartment: String
+}
+
+' QUALIFIER
+Driver "1" -- "1" Licence
+Customer "1" -- "1" Licence 
+
+@enduml
