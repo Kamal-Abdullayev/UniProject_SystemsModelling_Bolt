@@ -36,6 +36,11 @@ enum CarStatus {
   Pet
 }
 
+enum VehicleType {
+  Car
+  ElectricCar
+  Scooter
+}
 
 class ElectricCar {
   Battery: int
@@ -53,9 +58,9 @@ class Scooter {
 ' ABSTRACT CLASS
 abstract class Vehicle {
   Id: String
-  Status: String
+  Status: CarStatus
   VehicleIdentificationNumber: String
-  Type: String
+  Type: VehicleType
   Location: String
   Range: int <<derived>> ' Derived from Electric Vehicle battery percentage
   VehicleClassType: VehicleClassType
@@ -67,7 +72,6 @@ Scooter <|-- Vehicle
 ElectricCar <|-- Car
 
 
-
 ' SUPERCLASS AND GENERALIZATION
 class User {
   Id: String
@@ -76,7 +80,7 @@ class User {
   PhoneNumber: String
   Email: String
   IdentityNum: String
-  AccountStatus: String
+  AccountStatus: AccountStatus
   LicenceId: String
   Birth: Date
   Type: String
@@ -90,7 +94,7 @@ class Customer extends User {
   homeAddress: Address
   workAddress: Address
   preferredPaymentMethod: PaymentMethod
-  rideHistory: List<Order>
+  rideHistory: List[Order]
 }
 
 class Driver extends User {
@@ -113,8 +117,8 @@ class Employee extends User {
 class Licence {
   Id: String
   PIN: String
-  StartDate: Date
-  ExpiredDate: Date
+  StartDate: DateTime
+  ExpireDate: DateTime
   VehicleCategory: String
 }
 
@@ -136,7 +140,6 @@ CarStatus "1" -- "0..*" Car
 Vehicle "1" -- "1" Address
 
 
-
 class Order {
   Id: String
   UserId: String
@@ -144,14 +147,14 @@ class Order {
   StartDate: DateTime
   EndDate: DateTime
   Cost: float <<derived>> ' Derived from ride duration and pricing
-  Status: String
+  Status: OrderStatus
   Location: String
 }
 
 class Transaction {
   Id: String
   Amount: float
-  Status: String
+  Status: TransactionStatus
   UserId: String
   PaymentType: PaymentMethod
 }
@@ -162,8 +165,8 @@ class Subscription {
   Name: String
   Info: String
   Price: float
-  ValidityPeriod: String
-  VehicleType: String
+  ValidityPeriod: DateTime
+  VehicleType: VehicleType
 }
 
 class Address {
