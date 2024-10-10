@@ -43,6 +43,7 @@ class ElectricCar {
 
 class Car {
   Seats: int
+  carStatus: CarStatus
 }
 
 class Scooter {
@@ -85,6 +86,11 @@ class User {
 
 class Customer extends User {
   Id: String
+  referalCode: String
+  homeAddress: Address
+  workAddress: Address
+  preferredPaymentMethod: PaymentMethod
+  rideHistory: List<Order>
 }
 
 class Driver extends User {
@@ -92,6 +98,16 @@ class Driver extends User {
   EarnedMoney: int
   EarnedBonus: int
   WorkHours: int
+}
+
+class Employee extends User {
+  Id: String
+  department: String
+  role: String
+  salary: int
+  startDate: DateTime
+  socialSecurityNumber: int
+  taxNumber: int
 }
 
 class Licence {
