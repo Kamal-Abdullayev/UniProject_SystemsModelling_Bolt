@@ -136,7 +136,7 @@ AccountStatus "1" -- "0..*" User
 OrderStatus "1" -- "0..*" Order
 TransactionStatus "1" -- "0..*" Transaction
 CarStatus "1" -- "0..*" Car
-
+Subscription "0..*" -- "1" VehicleType
 Vehicle "1" -- "1" Address
 
 
