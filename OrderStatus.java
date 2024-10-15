@@ -1,0 +1,3 @@
+public enum OrderStatus {
+    SUCCESSFUL, WAITING, DRIVER_CANCEL, CUSTOMER_CANCEL
+}
