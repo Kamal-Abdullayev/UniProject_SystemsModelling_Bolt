@@ -1,3 +1,4 @@
+package generated_code;
 public class Employee extends User {
     private String department;
     private String role;

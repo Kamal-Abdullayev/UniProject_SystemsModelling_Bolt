@@ -1,3 +1,4 @@
+package generated_code;
 public class Subscription {
     private String id;
     private String name;

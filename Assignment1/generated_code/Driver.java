@@ -1,3 +1,4 @@
+package generated_code;
 public class Driver extends User {
     private int earnedMoney;
     private int earnedBonus;

@@ -1,3 +1,4 @@
+package generated_code;
 public abstract class Vehicle {
     private String id;
     private CarStatus status;

@@ -1,3 +1,4 @@
+package generated_code;
 public class Address {
     private String id;
     private String name;
@@ -6,5 +7,4 @@ public class Address {
     private String street;
     private String apartment;
 
-    // Getters and Setters
 }

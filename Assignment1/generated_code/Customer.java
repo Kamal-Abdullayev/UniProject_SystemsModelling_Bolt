@@ -1,3 +1,4 @@
+package generated_code;
 public class Customer extends User {
     private String referralCode;
     private Address homeAddress;
